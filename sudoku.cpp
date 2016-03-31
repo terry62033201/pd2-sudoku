@@ -25,47 +25,133 @@ void Sudoku::readIn()
 	{
 		for(j = 0; j < 9; j++)
 		{
-			cin >> sudo[i][j];
+			cin >> board[i][j];
 		}
 	}
 }
-void Sudoku::solve()
+bool Sudoku::solve(int sudo[9][9])
 {
+	int r, c, num;
+	if(!FindUnassignedLocation(sudo, r, c))
+		return true;
 
+	for(num = 1; num <= 9; num++)
+	{
+		if(valid(sudo, r, c, num))
+		{
+			sudo[r][i] = num;
+			
+			if(solve(sudo))
+				return true;
+			sudo[r][c] = 0;
+		}
+	}
+	return false;
 }
-int Sudoku::checkRow(int sudo[9][9], int r)
+/*int Sudoku::place_num(int n)
+{
+	int conflict, t;
+	int row, col, block_row, block_col;
+
+	if(n == 81)
+	{
+		for(i = 0; i < 9; i++)
+		{
+			for(j = 0; j < 9; j++)
+			{
+				sudo[i][j] = board[i][j];
+			}
+			cout << endl;
+		}
+		for(i = 0; i < 9; i++)
+		{
+			for(j = 0; j < 9; j++)
+			{
+				cout << sudo[i][j] << " ";
+			}
+			cout << endl;
+		}
+		return 1;
+	}
+
+	row = n / 9;
+	col = n % 9;
+	block_row = row / 3;
+	block_col = col / 3;
+
+	if(board[row][col] != 0)
+		return(place_num(n + 1));
+
+	for(t= 1; t <= 9; t++)
+	{
+		conflict = 0;
+		for(i = 0; i < 9 && !conflict; i++)
+			if(((col != i) && (board[row][i] == t)) || ((row != i) && (board[i][col] == t)))
+				conflict = 1;
+		if(!conflict)
+		{
+			for(i = 0; i < 3 && !conflict; i++)
+				for(j = 0; j < 3 && !conflict; j++)
+					if(board[3 * block_row + i][3 * block_col + j] == t)
+						conflict = 1;
+			if(!conflict)
+			{
+				board[row][col] = t;
+				if(place_num(n + 1))
+					return 1;
+			}
+		}
+	}
+	board[row][col] = 0;
+	return 0;
+}*/
+bool Sudoku::FindUnassignedLocation(int sudoku[9][9], int &r, int &c)
+{
+	for(r = 0; r < 9; r++)
+		for(c = 0; c < 9; c++)
+			if(sudo[r][c] == 0)
+				return true;
+		return false;
+}
+bool Sudoku::checkRow(int sudo[9][9], int r, int num)
 {
 	for(j = 0; j < 9; j++)
 	{
 		if(sudo[r][j] == 0)
 			continue;
 		if(sudo[r][j] == num)
-			return 0;
+			return true;
 	}
-	return 1;
+	return false;
 }
-int Sudoku::checkCol(int sudo[9][9], int c)
+bool Sudoku::checkCol(int sudo[9][9], int c, int num)
 {
 	for(i = 0; i < 9; i++)
 	{
 		if(sudo[i][c] == 0)
 			continue;
 		if(sudo[i][c] == num)
-			return 0;
+			return true;
 	}
-	return 1;
+	return false;
 }
-int Sudoku::checkBlock(int sudo[9][9], int r, int c, int setR, int setC)
+bool Sudoku::checkBlock(int sudo[9][9], int setR, int setC, int num)
 {
-	for(r = 0; r < 3; r++)
+	for(int r = 0; r < 3; r++)
 	{
-		for(c = 0; c < 3; c++)
+		for(int c = 0; c < 3; c++)
 		{
 			if(sudo[r + setR][c + setC] == num)
-				return 1;
+				return true;
 		}
 	}
-	return 0;
+	return false;
+}
+bool Sudoku::valid(int sudo[9][9], int r, int c, int num)
+{
+	return  !checkRow(sudo, r, num)&&
+			!checkCol(sudo, c, num)&&
+			!checkBlock(sudo, r - r % 3, c - c % 3, num);
 }
 void Sudoku::change()
 {
