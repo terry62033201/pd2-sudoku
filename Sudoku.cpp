@@ -66,6 +66,7 @@ int Sudoku::place_num(int n)
 
 	if(n == 81)
 	{
+		cout << "1" << endl;
 		for(i = 0; i < 9; i++)
 		{
 			for(j = 0; j < 9; j++)
