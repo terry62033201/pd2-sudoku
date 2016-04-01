@@ -357,9 +357,8 @@ void Sudoku::flip(int n)
 		}
 	}
 }
-void printOut()
+void Sudoku::transform()
 {
-}
-void transform()
-{
+	readIn();
+	change();
 }

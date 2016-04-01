@@ -1,6 +1,6 @@
 #include<iostream>
 #include<cstdlib>
-#include"sudoku.h"
+#include"Sudoku.h"
 using namespace std;
 
 int main()
@@ -12,6 +12,7 @@ int main()
 	tmr1.readIn();
 	tmr1.change();
 	tmr1.solve();
+	tmr1.transform();
 	//tmr1.checkBlock(sudo[9][9], r, c, r-r%3, c-c%3)
 	/*for(i = 0; i < 9; i++)
 	{
