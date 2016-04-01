@@ -1,5 +1,5 @@
 #include<iostream>
-#include"sudoku.h"
+#include"Sudoku.h"
 #include<cstdlib>
 #include<cstdio>
 #include<ctime>
