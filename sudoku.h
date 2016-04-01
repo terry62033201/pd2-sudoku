@@ -6,7 +6,7 @@ class Sudoku{
 	public:
 		void giveQuestion();
 		void readIn();
-		bool solve(int sudo[9][9]);
+		void solve();
 		void change();
 		void changeNum(int a, int b);
 		void changeRow(int a, int b);
@@ -21,7 +21,7 @@ class Sudoku{
 		bool checkCol(int sudo[9][9], int c, int num);
 		bool checkBlock(int sudo[9][9], int r, int c, int num);
 		int board[9][9];
+		int sudo[9][9];
 	private:
 		int i, j;
-		int sudo[9][9];
 };

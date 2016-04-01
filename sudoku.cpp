@@ -9,7 +9,7 @@ using namespace std;
 
 void Sudoku::giveQuestion()
 {
-	int board[9][9] =  {0,1,0,0,0,9,2,7,0,
+	/*int board[9][9] =  {0,1,0,0,0,9,2,7,0,
 						9,0,0,0,2,0,0,0,5,
 						4,0,0,6,0,0,0,0,0,
 						5,0,0,0,3,0,8,0,0,
@@ -17,7 +17,16 @@ void Sudoku::giveQuestion()
 						0,0,1,0,8,0,0,0,4,
 						0,0,0,0,0,2,0,0,3,
 						1,0,0,0,5,0,0,0,6,
-						0,6,3,8,0,0,0,5,0};
+						0,6,3,8,0,0,0,5,0};*/
+	int board[9][9] = {0,6,9,8,7,0,0,0,0,
+		4,3,7,0,0,2,0,0,1,
+		0,1,0,9,3,0,0,0,7,
+		6,0,0,7,0,5,9,0,3,
+		7,8,0,1,9,6,0,0,5,
+		1,9,0,2,4,3,6,7,0,
+		0,0,1,0,0,8,0,0,4,
+		3,0,0,0,1,0,0,0,6,
+		0,4,0,3,5,7,1,8,9};
 }
 void Sudoku::readIn()
 {
@@ -29,9 +38,9 @@ void Sudoku::readIn()
 		}
 	}
 }
-bool Sudoku::solve(int sudo[9][9])
+void Sudoku::solve()
 {
-	int r, c, num;
+	/*int r, c, num;
 	if(!FindUnassignedLocation(sudo, r, c))
 		return true;
 
@@ -46,9 +55,11 @@ bool Sudoku::solve(int sudo[9][9])
 			sudo[r][c] = 0;
 		}
 	}
-	return false;
+	return false;*/
+	place_num(0);
+	return;
 }
-/*int Sudoku::place_num(int n)
+int Sudoku::place_num(int n)
 {
 	int conflict, t;
 	int row, col, block_row, block_col;
@@ -61,7 +72,6 @@ bool Sudoku::solve(int sudo[9][9])
 			{
 				sudo[i][j] = board[i][j];
 			}
-			cout << endl;
 		}
 		for(i = 0; i < 9; i++)
 		{
@@ -104,8 +114,8 @@ bool Sudoku::solve(int sudo[9][9])
 	}
 	board[row][col] = 0;
 	return 0;
-}*/
-bool Sudoku::FindUnassignedLocation(int sudoku[9][9], int &r, int &c)
+}
+/*bool Sudoku::FindUnassignedLocation(int sudoku[9][9], int &r, int &c)
 {
 	for(r = 0; r < 9; r++)
 		for(c = 0; c < 9; c++)
@@ -152,7 +162,7 @@ bool Sudoku::valid(int sudo[9][9], int r, int c, int num)
 	return  !checkRow(sudo, r, num)&&
 			!checkCol(sudo, c, num)&&
 			!checkBlock(sudo, r - r % 3, c - c % 3, num);
-}
+}*/
 void Sudoku::change()
 {
 	srand(time(NULL));
@@ -177,7 +187,7 @@ void Sudoku::changeRow(int a, int b)
 {
 	int temp1[9], temp2[9], temp3[9];
 	
-	if(a == 0 && b == 1)
+	if((a == 0 && b == 1) || (a == 1 && b == 0))
 	{	
 		for(j = 0; j < 9; j++)
 		{
@@ -193,7 +203,7 @@ void Sudoku::changeRow(int a, int b)
 			board[4][j] = temp2[j];
 			board[5][j] = temp3[j];
 		}
-	}else if(a == 0 && b == 2)
+	}else if((a == 0 && b == 2) || (a == 2 && b == 0))
 	{
 		for(j = 0; j < 9; j++)
 		{
@@ -209,7 +219,7 @@ void Sudoku::changeRow(int a, int b)
 		    board[7][j] = temp2[j];
 		    board[8][j] = temp3[j];
 		}
-	}else if(a == 1 && b == 2)
+	}else if((a == 1 && b == 2) || (a == 2 && b == 1))
 	{
 		for(j = 0; j < 9; j++)
 		{
@@ -229,55 +239,55 @@ void Sudoku::changeRow(int a, int b)
 }
 void Sudoku::changeCol(int a, int b)
 {
-	int temp1[9], temp2[9], temp3[9];
+	int tempa[9], tempb[9], tempc[9];
 
 	if((a == 0 && b == 1) || (a == 1 && b == 0))
 	{
 		for(i = 0; i < 9; i++)
 		{
-			temp1[i] = board[i][0];
-			temp2[i] = board[i][1];
-			temp3[i] = board[i][2];
+			tempa[i] = board[i][0];
+			tempb[i] = board[i][1];
+			tempc[i] = board[i][2];
 
 			board[i][0] = board[i][3];
 			board[i][1] = board[i][4];
 			board[i][2] = board[i][5];
 
-			board[i][3] = temp1[i];
-			board[i][4] = temp2[i];
-			board[i][5] = temp3[i];
+			board[i][3] = tempa[i];
+			board[i][4] = tempb[i];
+			board[i][5] = tempc[i];
 		}
 	}else if((a == 0 && b == 2) || (a == 2 && b == 0))
 	{
 		for(i = 0; i < 9; i++)
 		{
-			temp1[i] = board[i][0];
-			temp2[i] = board[i][1];
-			temp3[i] = board[i][2];
+			tempa[i] = board[i][0];
+			tempb[i] = board[i][1];
+			tempc[i] = board[i][2];
 			
 			board[i][0] = board[i][6];
 			board[i][1] = board[i][7];
 			board[i][2] = board[i][8];
 
-			board[i][3] = temp1[i];
-			board[i][4] = temp2[i];
-			board[i][5] = temp3[i];
+			board[i][6] = tempa[i];
+			board[i][7] = tempb[i];
+			board[i][8] = tempc[i];
 		}
 	}else if((a == 1 && b == 2) || (a == 2 && b == 1))
 	{
 		for(i = 0; i < 9; i++)
 		{
-			 temp1[i] = board[i][0];
-		     temp2[i] = board[i][1];
-		     temp3[i] = board[i][2];
+			 tempa[i] = board[i][3];
+		     tempb[i] = board[i][4];
+		     tempc[i] = board[i][5];
 		 
 		 	 board[i][3] = board[i][6];
 		     board[i][4] = board[i][7];
 		     board[i][5] = board[i][8];
 
-			 board[i][3] = temp1[i];
-			 board[i][4] = temp2[i];
-			 board[i][5] = temp3[i];
+			 board[i][6] = tempa[i];
+			 board[i][7] = tempb[i];
+			 board[i][8] = tempc[i];
 		}
 	}
 }
@@ -346,6 +356,9 @@ void Sudoku::flip(int n)
 			board[i][5] = temp_h4[i];
 		}
 	}
+}
+void printOut()
+{
 }
 void transform()
 {
