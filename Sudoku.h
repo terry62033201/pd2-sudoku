@@ -15,6 +15,8 @@ class Sudoku{
 		void flip(int n);
 		void transform();
 		int place_num(int n);
+		int place_numr(int n);
+		void printOut();
 		bool FindUnassignedLocation(int sudo[9][9], int &r, int &c);
 		bool valid(int sudo[9][9], int r, int c, int num);
 		bool checkRow(int sudo[9][9], int r, int num);
@@ -22,6 +24,7 @@ class Sudoku{
 		bool checkBlock(int sudo[9][9], int r, int c, int num);
 		int board[9][9];
 		int sudo[9][9];
+		int sudor[9][9];
 	private:
 		int i, j;
 };
