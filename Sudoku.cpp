@@ -1,10 +1,7 @@
 #include<iostream>
 #include"Sudoku.h"
 #include<cstdlib>
-#include<cstdio>
 #include<ctime>
-#include<cstring>
-#include<algorithm>
 using namespace std;
 
 void Sudoku::giveQuestion()
@@ -42,7 +39,7 @@ void Sudoku::solve()
 			{
 				if(sudo[i][j] != sudor[i][j]){
 					cout << "2";
-				exit(1);
+					exit(1);
 				}
 			}
 		}
@@ -156,54 +153,6 @@ int Sudoku::place_numr(int n)
 	board[row][col] = 0;
 	return 0;
 }
-/*bool Sudoku::FindUnassignedLocation(int sudoku[9][9], int &r, int &c)
-{
-	for(r = 0; r < 9; r++)
-		for(c = 0; c < 9; c++)
-			if(sudo[r][c] == 0)
-				return true;
-		return false;
-}
-bool Sudoku::checkRow(int sudo[9][9], int r, int num)
-{
-	for(j = 0; j < 9; j++)
-	{
-		if(sudo[r][j] == 0)
-			continue;
-		if(sudo[r][j] == num)
-			return true;
-	}
-	return false;
-}
-bool Sudoku::checkCol(int sudo[9][9], int c, int num)
-{
-	for(i = 0; i < 9; i++)
-	{
-		if(sudo[i][c] == 0)
-			continue;
-		if(sudo[i][c] == num)
-			return true;
-	}
-	return false;
-}
-bool Sudoku::checkBlock(int sudo[9][9], int setR, int setC, int num)
-{
-	for(int r = 0; r < 3; r++)
-	{
-		for(int c = 0; c < 3; c++)
-		{
-			if(sudo[r + setR][c + setC] == num)
-				return true;
-		}
-	}
-	return false;
-}
-bool Sudoku::valid(int sudo[9][9], int r, int c, int num)
-{
-	return  !checkRow(sudo, r, num)&&
-			!checkCol(sudo, c, num)&&
-			!checkBlock(sudo, r - r % 3, c - c % 3, num);
-}*/
 void Sudoku::change()
 {
 	srand(time(NULL));
