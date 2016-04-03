@@ -14,6 +14,8 @@ class Sudoku{
 		void rotate(int n);
 		void flip(int n);
 		void transform();
+		bool check_ini_row();
+		bool check_ini_col();
 		int place_num(int n);
 		int place_numr(int n);
 		void printOut();
@@ -21,5 +23,5 @@ class Sudoku{
 		int sudo[9][9];
 		int sudor[9][9];
 	private:
-		int i, j;
+		int i, j, r, c;
 };

@@ -32,9 +32,63 @@ void Sudoku::readIn()
 			sudor[i][j] = sudo[i][j];
 		}
 	}
+	for(i = 0; i < 9; i++)
+	{
+		for(j = 0; j < 9; j++)
+		{
+			board[i][j] = sudo[i][j];
+		}
+	}
+}
+bool Sudoku::check_ini_row()
+{
+	int arr[9];
+		for(int num = 1; num <= 9; num++)
+		{
+			for(j = 0; j < 9; j++)
+			{
+				if(sudo[r][j] == num)
+					arr[num - 1]++;
+			}
+		}
+		for(j = 0; j < 9; j++)
+		{
+			if(arr[j] > 1)
+				return false;
+		}
+}
+bool Sudoku::check_ini_col()
+{
+	int arr[9];
+	for(int num = 1; num <= 9; num++)
+	{
+		for(i = 0; i < 9; i++)
+		{
+			if(sudo[i][c] == num)
+				arr[num - 1]++;
+		}
+	}
+	for(i = 0; i < 9; i++)
+	{
+		if(arr[i] > 1)
+			return false;
+	}
 }
 void Sudoku::solve()
 {
+	for(r = 0; r < 9; r++)
+	{
+		check_ini_row();
+	}
+	for(c = 0; c < 9; c++)
+	{
+		check_ini_col();
+	}
+	if(check_ini_row() == false || check_ini_col() == false)
+	{
+		cout << "0" << endl;
+		exit(1);
+	}
 	place_num(0);
 	place_numr(0);
 
@@ -63,22 +117,6 @@ void Sudoku::solve()
 	}else
 	{
 		cout << "0" << endl;
-		for(i = 0; i < 9; i++)
-		{
-			for(j = 0; j < 9; j++)
-			{
-				cout << sudo[i][j] << " ";
-			}
-			cout << endl;
-		}
-		for(i = 0; i < 9; i++)
-		{
-			for(j = 0; j < 9; j++)
-			{
-				cout << sudor[i][j] << " ";
-			}
-			cout << endl;
-		}
 	}
 }
 int Sudoku::place_num(int n)
@@ -88,14 +126,6 @@ int Sudoku::place_num(int n)
 
 	if(n == 81)
 	{
-		/*for(i = 0; i < 9; i++)
-		{
-			for(j = 0; j < 9; j++)
-			{
-				cout << sudo[i][j] << " ";
-			}
-			cout << endl;
-		}*/
 		return 1;
 	}
 
@@ -137,14 +167,6 @@ int Sudoku::place_numr(int u)
 
 	if(u == 81)
 	{
-		/*for(i = 0; i < 9; i++)
-		{
-			for(j = 0; j < 9; j++)
-			{
-				cout << sudor[i][j] << " ";
-			}
-			cout << endl;
-		}*/
 		return 1;
 	}
 
@@ -196,7 +218,7 @@ void Sudoku::changeNum(int a, int b)
 		{
 			if(board[i][j] == a)
 				board[i][j] = b;
-			else if(board[i][j] == b)
+			else if(sudo[i][j] == b)
 				board[i][j] = a;
 		}
 }
@@ -376,8 +398,10 @@ void Sudoku::flip(int n)
 }
 void Sudoku::printOut()
 {
-	for(i = 0; i < 9; i++){
-		for(j = 0; j < 9; j++){
+	for(i = 0; i < 9; i++)
+	{
+		for(j = 0; j < 9; j++)
+		{
 			cout << board[i][j] << " ";
 		}
 		cout << endl;
