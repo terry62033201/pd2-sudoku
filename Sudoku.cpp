@@ -42,48 +42,83 @@ void Sudoku::readIn()
 }
 bool Sudoku::check_ini_row()
 {
-	int arr[9];
+	int arr[9] = {0,0,0,0,0,0,0,0,0};
+	for(j = 0; j < 9; j++)
+	{
 		for(int num = 1; num <= 9; num++)
 		{
-			for(j = 0; j < 9; j++)
-			{
-				if(sudo[r][j] == num)
-					arr[num - 1]++;
-			}
+			if(sudo[0][j] == num)
+				arr[num - 1]++;
+			if(sudo[1][j] == num)
+				arr[num - 1]++;
+			if(sudo[2][j] == num)
+				arr[num - 1]++;
+			if(sudo[3][j] == num)
+				arr[num - 1]++;
+			if(sudo[4][j] == num)
+				arr[num - 1]++;
+			if(sudo[5][j] == num)
+				arr[num - 1]++;
+			if(sudo[6][j] == num)
+				arr[num - 1]++;
+			if(sudo[7][j] == num)
+				arr[num - 1]++;
+			if(sudo[8][j] == num)
+				arr[num - 1]++;
+		
 		}
 		for(j = 0; j < 9; j++)
 		{
 			if(arr[j] > 1)
 				return false;
+			else
+				arr[j] = 0;
 		}
+	}
+	return true;
 }
 bool Sudoku::check_ini_col()
 {
 	int arr[9];
-	for(int num = 1; num <= 9; num++)
-	{
-		for(i = 0; i < 9; i++)
-		{
-			if(sudo[i][c] == num)
-				arr[num - 1]++;
-		}
-	}
+
 	for(i = 0; i < 9; i++)
 	{
-		if(arr[i] > 1)
-			return false;
+		for(int num = 1; num <= 9; i++)
+		{
+			if(sudo[i][0] == num)
+				arr[num - 1]++;
+			if(sudo[i][1] == num)
+				arr[num - 1]++;
+			if(sudo[i][2] == num)
+				arr[num - 1]++;
+			if(sudo[i][3] == num)
+				arr[num - 1]++;
+			if(sudo[i][4] == num)
+				arr[num - 1]++;
+			if(sudo[i][5] == num)
+				arr[num - 1]++;
+			if(sudo[i][6] == num)
+				arr[num - 1]++;
+			if(sudo[i][7] == num)
+				arr[num - 1]++;
+			if(sudo[i][8] == num)
+				arr[num - 1]++;
+		}
+		for(i = 0; i < 9; i++)
+		{
+			if(arr[i] > 1)
+				return false;
+			else
+				arr[i] = 0;
+		}
 	}
+	return true;
 }
 void Sudoku::solve()
 {
-	for(r = 0; r < 9; r++)
-	{
-		check_ini_row();
-	}
-	for(c = 0; c < 9; c++)
-	{
-		check_ini_col();
-	}
+	check_ini_row();
+	check_ini_col();
+
 	if(check_ini_row() == false || check_ini_col() == false)
 	{
 		cout << "0" << endl;
