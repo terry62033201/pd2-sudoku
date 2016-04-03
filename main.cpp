@@ -9,7 +9,8 @@ int main()
 	Sudoku tmr1;
 
 	tmr1.giveQuestion();
-	tmr1.transform();
+	tmr1.readIn();
+	//tmr1.transform();
 	tmr1.solve();
 	/*for(i = 0; i < 9; i++)
 	{

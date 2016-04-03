@@ -25,6 +25,13 @@ void Sudoku::readIn()
 			cin >> board[i][j];
 		}
 	}
+	for(i = 0; i < 9; i++)
+	{
+		for(j = 0; j < 9; j++)
+		{
+			cin >> board2[i][j];
+		}
+	}
 }
 void Sudoku::solve()
 {
@@ -38,7 +45,7 @@ void Sudoku::solve()
 			for(j = 0; j < 9; j++)
 			{
 				if(sudo[i][j] != sudor[i][j]){
-					cout << "2";
+					cout << "2" << endl;
 					exit(1);
 				}
 			}
@@ -53,9 +60,33 @@ void Sudoku::solve()
 			}
 			cout << endl;
 		}
+	for(i = 0; i < 9; i++)
+	{
+		for(j = 0; j < 9; j++)
+		{
+			cout << sudor[i][j] << " ";
+		}
+		cout << endl;
+	}
 	}else
 	{
 		cout << "0" << endl;
+		for(i = 0; i < 9; i++)
+		{
+			for(j = 0; j < 9; j++)
+			{
+				cout << sudo[i][j] << " ";
+			}
+			cout << endl;
+		}
+		for(i = 0; i < 9; i++)
+		{
+			for(j = 0; j < 9; j++)
+			{
+				cout << sudor[i][j] << " ";
+			}
+			cout << endl;
+		}
 	}	
 }
 int Sudoku::place_num(int n)
@@ -83,7 +114,7 @@ int Sudoku::place_num(int n)
 	if(board[row][col] != 0)
 		return(place_num(n + 1));
 
-	for(t= 1; t <= 9; t++)
+	for(t= 9; t > 0; t--)
 	{
 		conflict = 0;
 		for(i = 0; i < 9 && !conflict; i++)
@@ -106,52 +137,54 @@ int Sudoku::place_num(int n)
 	board[row][col] = 0;
 	return 0;
 }
-int Sudoku::place_numr(int n)
+int Sudoku::place_numr(int u)
 {
 	int conflict, t;
 	int row, col, block_row, block_col;
 
-	if(n == 81)
+	if(u == 81)
 	{
 		for(i = 0; i < 9; i++)
 		{
 			for(j = 0; j < 9; j++)
 			{
-				sudor[i][j] = board[i][j];
+				sudor[i][j] = board2[i][j];
 			}
 		}
 		return 1;
 	}
 
-	row = n / 9;
-	col = n % 9;
+	row = u / 9;
+	col = u % 9;
 	block_row = row / 3;
 	block_col = col / 3;
 
-	if(board[i][j] != 0)
-		return(place_numr(n + 1));
-	for(t = 9; t > 0; t--)
+	if(board2[row][col] != 0)
+		return(place_numr(u + 1));
+	
+	for(t= 1; t <= 9; t++)
 	{
 		conflict = 0;
-	for(i = 0; i < 9 && !conflict; i++)
-		if(((col != i) && (board[row][i] == t)) || ((row != i) && (board[i][col] == t)))
-			conflict = 1;
-	if(!conflict)
-	{
-		for(i = 0; i < 3 && !conflict; i++)
-			for(j = 0; j < 3 && !conflict; j++)
-				if(board[3 * block_row + i][3 * block_col + j] == t)
-					conflict = 1;
+		for(i = 0; i < 9 && !conflict; i++)
+			if(((col != i) && (board2[row][i] == t)) || ((row != i) && (board2[i][col] == t)))
+				conflict = 1;
 		if(!conflict)
 		{
-			board[row][col] = t;
-			if(place_numr(n + 1))
-				return 1;
+			for(i = 0; i< 3 && !conflict; i++)
+				for(j = 0; j < 3 && !conflict; j++)
+					if(board2[3 * block_row + i][3 * block_col + j] == t)
+						conflict = 1;
+			if(!conflict)
+			{
+				board2[row][col] = t;
+				if(place_numr(u + 1))
+					return 1;
+			}
 		}
 	}
-	}
-	board[row][col] = 0;
+	board2[row][col] = 0;
 	return 0;
+
 }
 void Sudoku::change()
 {
