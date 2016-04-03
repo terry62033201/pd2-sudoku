@@ -18,7 +18,6 @@ class Sudoku{
 		int place_numr(int n);
 		void printOut();
 		int board[9][9];
-		int board2[9][9];
 		int sudo[9][9];
 		int sudor[9][9];
 	private:

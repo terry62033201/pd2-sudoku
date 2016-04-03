@@ -22,14 +22,14 @@ void Sudoku::readIn()
 	{
 		for(j = 0; j < 9; j++)
 		{
-			cin >> board[i][j];
+			cin >> sudo[i][j];
 		}
 	}
 	for(i = 0; i < 9; i++)
 	{
 		for(j = 0; j < 9; j++)
 		{
-			cin >> board2[i][j];
+			sudor[i][j] = sudo[i][j];
 		}
 	}
 }
@@ -37,7 +37,7 @@ void Sudoku::solve()
 {
 	place_num(0);
 	place_numr(0);
-	
+
 	if(place_num(0) == 1 && place_numr(0) == 1)
 	{	
 		for(i = 0; i < 9; i++)
@@ -60,14 +60,6 @@ void Sudoku::solve()
 			}
 			cout << endl;
 		}
-	for(i = 0; i < 9; i++)
-	{
-		for(j = 0; j < 9; j++)
-		{
-			cout << sudor[i][j] << " ";
-		}
-		cout << endl;
-	}
 	}else
 	{
 		cout << "0" << endl;
@@ -87,7 +79,7 @@ void Sudoku::solve()
 			}
 			cout << endl;
 		}
-	}	
+	}
 }
 int Sudoku::place_num(int n)
 {
@@ -96,13 +88,14 @@ int Sudoku::place_num(int n)
 
 	if(n == 81)
 	{
-		for(i = 0; i < 9; i++)
+		/*for(i = 0; i < 9; i++)
 		{
 			for(j = 0; j < 9; j++)
 			{
-				sudo[i][j] = board[i][j];
+				cout << sudo[i][j] << " ";
 			}
-		}
+			cout << endl;
+		}*/
 		return 1;
 	}
 
@@ -111,30 +104,30 @@ int Sudoku::place_num(int n)
 	block_row = row / 3;
 	block_col = col / 3;
 
-	if(board[row][col] != 0)
+	if(sudo[row][col] != 0)
 		return(place_num(n + 1));
 
 	for(t= 9; t > 0; t--)
 	{
 		conflict = 0;
 		for(i = 0; i < 9 && !conflict; i++)
-			if(((col != i) && (board[row][i] == t)) || ((row != i) && (board[i][col] == t)))
+			if(((col != i) && (sudo[row][i] == t)) || ((row != i) && (sudo[i][col] == t)))
 				conflict = 1;
 		if(!conflict)
 		{
 			for(i = 0; i < 3 && !conflict; i++)
 				for(j = 0; j < 3 && !conflict; j++)
-					if(board[3 * block_row + i][3 * block_col + j] == t)
+					if(sudo[3 * block_row + i][3 * block_col + j] == t)
 						conflict = 1;
 			if(!conflict)
 			{
-				board[row][col] = t;
+				sudo[row][col] = t;
 				if(place_num(n + 1))
 					return 1;
 			}
 		}
 	}
-	board[row][col] = 0;
+	sudo[row][col] = 0;
 	return 0;
 }
 int Sudoku::place_numr(int u)
@@ -144,13 +137,14 @@ int Sudoku::place_numr(int u)
 
 	if(u == 81)
 	{
-		for(i = 0; i < 9; i++)
+		/*for(i = 0; i < 9; i++)
 		{
 			for(j = 0; j < 9; j++)
 			{
-				sudor[i][j] = board2[i][j];
+				cout << sudor[i][j] << " ";
 			}
-		}
+			cout << endl;
+		}*/
 		return 1;
 	}
 
@@ -159,30 +153,30 @@ int Sudoku::place_numr(int u)
 	block_row = row / 3;
 	block_col = col / 3;
 
-	if(board2[row][col] != 0)
+	if(sudor[row][col] != 0)
 		return(place_numr(u + 1));
 	
 	for(t= 1; t <= 9; t++)
 	{
 		conflict = 0;
 		for(i = 0; i < 9 && !conflict; i++)
-			if(((col != i) && (board2[row][i] == t)) || ((row != i) && (board2[i][col] == t)))
+			if(((col != i) && (sudor[row][i] == t)) || ((row != i) && (sudor[i][col] == t)))
 				conflict = 1;
 		if(!conflict)
 		{
 			for(i = 0; i< 3 && !conflict; i++)
 				for(j = 0; j < 3 && !conflict; j++)
-					if(board2[3 * block_row + i][3 * block_col + j] == t)
+					if(sudor[3 * block_row + i][3 * block_col + j] == t)
 						conflict = 1;
 			if(!conflict)
 			{
-				board2[row][col] = t;
+				sudor[row][col] = t;
 				if(place_numr(u + 1))
 					return 1;
 			}
 		}
 	}
-	board2[row][col] = 0;
+	sudor[row][col] = 0;
 	return 0;
 
 }
