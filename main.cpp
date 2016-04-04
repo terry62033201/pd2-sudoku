@@ -7,8 +7,6 @@ int main()
 {
 	int i, j;
 	Sudoku tmr1;
-
-	tmr1.giveQuestion();
 	tmr1.readIn();
 	/*for(i = 0; i < 9; i++)
 	{
@@ -20,7 +18,6 @@ int main()
 	}
 	cout << endl;
 	tmr1.flip(1);*/
-	tmr1.transform();
 	tmr1.solve();
 	
 	/*for(i = 0; i < 9; i++)

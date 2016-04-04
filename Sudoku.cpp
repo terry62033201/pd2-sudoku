@@ -245,11 +245,6 @@ void Sudoku::change()
 }
 void Sudoku::changeNum(int a, int b)
 {
-	if(a <= 0 || b <= 0 || a > 9 || b > 9)
-	{
-		cout << "ERROR";
-		exit(1);
-	}
 	for(i = 0; i < 9; i++)
 		for(j = 0; j < 9; j++)
 		{
@@ -261,11 +256,6 @@ void Sudoku::changeNum(int a, int b)
 }
 void Sudoku::changeRow(int a, int b)
 {
-	if(a < 0 || b < 0 || a > 2 || b > 2)
-	{
-		cout << "ERROR";
-		exit(1);
-	}
 	int temp1[9], temp2[9], temp3[9];
 	
 	if((a == 0 && b == 1) || (a == 1 && b == 0))
@@ -320,11 +310,6 @@ void Sudoku::changeRow(int a, int b)
 }
 void Sudoku::changeCol(int a, int b)
 {
-	if(a < 0 || a < 0 || a > 2 || b > 2)
-	{
-		cout << "ERROR";
-		exit(1);
-	}
 	int tempa[9], tempb[9], tempc[9];
 
 	if((a == 0 && b == 1) || (a == 1 && b == 0))
@@ -379,11 +364,6 @@ void Sudoku::changeCol(int a, int b)
 }
 void Sudoku::rotate(int n)
 {
-	if(n < 0 || n > 100)
-	{
-		cout << "ERROR";
-		exit(1);
-	}
 	int t, r_tmp[9][9];
 	for(t = 0; t < n; t++)
 	{
