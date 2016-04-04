@@ -76,12 +76,6 @@ bool Sudoku::check_ini_row()
 			}
 		}
 	}
-	cout << "arr :" << endl;
-	for(j = 0; j < 9; j++)
-	{
-		cout << arr[j];
-	}
-	cout << endl;
 	return true;
 
 }
@@ -394,7 +388,7 @@ void Sudoku::flip(int n)
 	int temp_v1[9], temp_v2[9], temp_v3[9], temp_v4[9];
 	int temp_h1[9], temp_h2[9], temp_h3[9], temp_h4[9];
 	
-	if(n == 1)
+	if(n == 0)
 	{
 		for(j = 0; j < 9; j++)
 		{
