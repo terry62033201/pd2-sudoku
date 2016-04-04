@@ -1,6 +1,5 @@
 #include<iostream>
 #include<cstdio>
-#define sudokuSize 81
 using namespace std;
 class Sudoku{
 	public:
@@ -23,5 +22,5 @@ class Sudoku{
 		int sudo[9][9];
 		int sudor[9][9];
 	private:
-		int i, j, r, c;
+		int i, j, check;
 };
