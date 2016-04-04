@@ -10,9 +10,7 @@ int main()
 
 	tmr1.giveQuestion();
 	tmr1.readIn();
-	tmr1.transform();
-	tmr1.solve();
-	for(i = 0; i < 9; i++)
+	/*for(i = 0; i < 9; i++)
 	{
 		for(j = 0; j < 9; j++)
 		{
@@ -20,6 +18,20 @@ int main()
 		}
 		cout << endl;
 	}
+	cout << endl;
+	tmr1.flip(1);*/
+	tmr1.transform();
+	tmr1.solve();
+	
+	/*for(i = 0; i < 9; i++)
+	{
+		for(j = 0; j < 9; j++)
+		{
+			cout << tmr1.board[i][j] << " ";
+		}
+		cout << endl;
+	}*/
+	
     
 	return 0;
 }
