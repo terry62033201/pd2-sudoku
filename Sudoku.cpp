@@ -41,38 +41,12 @@ void Sudoku::readIn()
 		}
 	}
 }
-/*int Sudoku::row_check(int r)
-{
-	memset(flag, 0, sizeof(flag));
-	for(i = 0; i < 9; i++)
-	{
-		if(sudo[i][r] == 0)
-			continue;
-		if(flag[sudo[i][r]] == true)
-			return -1;
-		flag[sudo[i][r]] == true;
-	}
-	return 0;
-}
-int Sudoku::column_check(int c)
-{
-	memset(flag, 0, sizeof(flag));
-	for(i = 0; i < 9; i++)
-	{
-		if(sudo[c][i] == 0)
-			continue;
-		if(flag[sudo[c][i]] == true)
-			return -1;
-		flag[sudo[c][i]] == true;
-	}
-	return 0;
-}*/
 bool Sudoku::check_ini_row()
 {
 	int arr[9] = {0,0,0,0,0,0,0,0,0};
-	for(j = 0; j < 9; j++)
+	for(int num = 1; num <= 9; num++)
 	{
-		for(int num = 1; num <= 9; num++)
+		for(j = 0; j < 9; j++)
 		{
 			if(sudo[0][j] == num)
 				arr[num - 1]++;
@@ -92,25 +66,32 @@ bool Sudoku::check_ini_row()
 				arr[num - 1]++;
 			if(sudo[8][j] == num)
 				arr[num - 1]++;
-		
-		}
-		for(j = 0; j < 9; j++)
-		{
-			if(arr[j] > 1)
-				return false;
-			else
-				arr[j] = 0;
+
+			for(j = 0; j < 9; j++)
+			{
+				if(arr[j] > 1)
+					return false;
+				else
+					arr[j] = 0;
+			}
 		}
 	}
+	cout << "arr :" << endl;
+	for(j = 0; j < 9; j++)
+	{
+		cout << arr[j];
+	}
+	cout << endl;
 	return true;
+
 }
 bool Sudoku::check_ini_col()
 {
-	int arr[9];
+	int arr[9] = {0,0,0,0,0,0,0,0,0};
 
-	for(i = 0; i < 9; i++)
+	for(int num = 1; num <= 9; num++)
 	{
-		for(int num = 1; num <= 9; num++)
+		for(i = 0; i < 9; i++)
 		{
 			if(sudo[i][0] == num)
 				arr[num - 1]++;
@@ -130,43 +111,25 @@ bool Sudoku::check_ini_col()
 				arr[num - 1]++;
 			if(sudo[i][8] == num)
 				arr[num - 1]++;
-		}
-		for(i = 0; i < 9; i++)
-		{
-			if(arr[i] > 1)
-				return false;
-			else
-				arr[i] = 0;
-		}
+
+			for(j = 0; j < 9; j++)
+			{
+				if(arr[j] > 1)
+					return false;
+				else
+					arr[j] = 0;
+			}
+		}	
 	}
 	return true;
 }
 void Sudoku::solve()
 {
-	check_ini_row();
-	check_ini_col();
-
 	if(check_ini_row() == false || check_ini_col() == false)
 	{
-		cout << "0" << endl;
+		cout << "0"<<endl;
 		exit(1);
 	}
-	/*for(i = 0; i < 9; i++)
-	{
-		check = column_check(i);
-		if(check == -1)
-		{
-			cout << "0" << endl;
-			return;
-		}
-		check = row_check(i);
-		if(check == -1)
-		{
-			cout << "0" << endl;
-			return;
-		}
-	}*/
-
 	if(place_num(0) == 1 && place_numr(0) == 1)
 	{	
 		for(i = 0; i < 9; i++)
