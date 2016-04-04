@@ -119,11 +119,11 @@ bool Sudoku::check_ini_col()
 }
 void Sudoku::solve()
 {
-	if(check_ini_row() == false || check_ini_col() == false)
+	/*if(check_ini_row() == false || check_ini_col() == false)
 	{
 		cout << "0"<<endl;
 		exit(1);
-	}
+	}*/
 	if(place_num(0) == 1 && place_numr(0) == 1)
 	{	
 		for(i = 0; i < 9; i++)
